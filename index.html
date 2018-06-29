@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <title>Word Guess Game</title>
+
+</head>
+
+<body>
+        <div class="box">
+                <img src="http://dipwizard.com/wp-content/uploads/DipWizard-Logo.png"
+                    width= 250px height 250px alt="Andrew">
+    <h1>Welcome to the Letter Guessing Game!</h1>
+    <p>Every time you guess a letter wrong, you lose a guess. Compete for a high score! </p>
+</div>
+<div id="game">
+    <p>Wins:
+        <span id="win">0</span>
+    </p>
+    <p>Loses:
+        <span id="lose">0</span>
+    </p>
+    <p>Guesses:
+        <span id="guesses">9</span>
+    </p>
+    <p>Letters guessed: <span id="letters-guessed"></span></p>
+</div>
+
+<script type="text/javascript">
+
+//This function is run whenever the user presses a key.
+//Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+var letterChoices= ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o", "p","q","r","s","t","u","v","w","x","y","z"];
+// var commonWords = ["help","struggle","need","catch","up"];
+
+var win = 0;
+var lose = 0;
+var guesses = 10;
+var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+var lettersGuessed = [];
+
+console.log(computerChoice);
+
+document.onkeyup = function (event) {
+
+// Determines which key was pressed and to run function
+    var userGuess = event.key.toLowerCase();
+
+    if(lettersGuessed.indexOf(userGuess) !== -1){
+        return;
+    }else{
+        lettersGuessed.push(userGuess);
+        document.getElementById("letters-guessed").textContent = lettersGuessed.join("-");
+        console.log(lettersGuessed);
+    }
+
+/*
+if (userGuess === computerChoice) {
+    win++;
+} else {
+    guesses--;
+} if (guesses === 0) {
+    lose++
+}
+*/
+
+
+    //This resets the guesses so far
+    
+    if (computerChoice == userGuess) {
+        win++;
+        console.log("You won!");
+        alert("+1 Win nice job!")
+        guessesSoFar = [];
+        computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        console.log("Win: " + win + "Losses:" + lose + "guesses:" + guesses + "Guesses So Far:" + guessesSoFar + "Computer Chose:" + computerChoice);
+    }
+
+    if (computerChoice != userGuess) {
+        guesses--;
+        guessesSoFar = [];
+        computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        console.log("Win: " + win + "Losses:" + lose + "guesses:" + guesses + "Guesses So Far:" + guessesSoFar + "Computer Chose:" + computerChoice);
+    }
+    
+    if (guesses === 0) {
+        alert("You ran out of guesses! Time to Restart!");
+        guesses = 9
+        lose++;
+    }
+     // var winElement = document.getElementById("winElement");
+     //  var loseElement = document.getElementById("loseElement");
+     //  var tieElement = document.getElementById("tieElement");
+
+
+ 
+
+
+
+document.getElementById('win').innerHTML = "" + win;
+document.getElementById('lose').innerHTML = "" + lose;
+document.getElementById('guesses').innerHTML = "" + guesses;
+}
+</script>
+
+</html>
+</body>
