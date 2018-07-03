@@ -57,10 +57,12 @@ document.onkeyup = function (event) {
 
 // Determines which key was pressed and to run function
     var userGuess = event.key.toLowerCase();
+
+    var isGuessLetter = /^[a-z]+$/i.test(userGuess); //how to make function only letters... need if statement around entire code and else to alert to letters only
     //how to make accept only alphanumeric values?
 
 //   ^[a-z]+$/.test(userGuess);
-
+if(isGuessLetter) {
     if(lettersGuessed.indexOf(userGuess) !== -1){
         //return would make this function unable to input the same letter twice in a game
         console.log(userGuess);
@@ -95,7 +97,9 @@ document.onkeyup = function (event) {
         guesses = 9
         lose++;
     }
-
+} else {
+    alert("Letters only!")
+}
 document.getElementById('win').innerHTML = " " + win;
 document.getElementById('lose').innerHTML = " " + lose;
 document.getElementById('guesses').innerHTML = " " + guesses;
