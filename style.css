@@ -3,4 +3,35 @@ body {
     color: white;
     margin: 30px;
     width: 960px;
+    font-family: 'Lustria', serif;
 }
+h1 {
+    
+        display: grid;
+        transition: all .5s;
+        user-select: none;
+        background: linear-gradient(to bottom, white, black);
+        animation-duration: 1.5s;
+        animation-name: slidein;
+      }
+
+#game {
+    border: 1px solid white;
+    padding:7px; 
+}
+
+#letters-guessed {
+    color: red;
+  }
+  
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%; 
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }

@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="style.css">
     
@@ -25,16 +26,16 @@
     <p>Every time you guess a letter wrong, you lose a guess. Compete for a high score! </p>
 </div>
 <div id="game">
-    <p>Wins:
+    <p> Wins:
         <span id="win">0</span>
     </p>
-    <p>Loses:
+    <p> Losses:
         <span id="lose">0</span>
     </p>
-    <p>Guesses:
+    <p> Guesses Remaining:
         <span id="guesses">9</span>
     </p>
-    <p>Letters guessed: <span id="letters-guessed"></span></p>
+    <p>Letters Guessed: <span id="letters-guessed"></span></p>
 </div>
 
 <script type="text/javascript">
@@ -56,9 +57,13 @@ document.onkeyup = function (event) {
 
 // Determines which key was pressed and to run function
     var userGuess = event.key.toLowerCase();
+    //how to make accept only alphanumeric values?
+
+//   ^[a-z]+$/.test(userGuess);
 
     if(lettersGuessed.indexOf(userGuess) !== -1){
-        return;
+        //return would make this function unable to input the same letter twice in a game
+        console.log(userGuess);
     }else{
         lettersGuessed.push(userGuess);
         document.getElementById("letters-guessed").textContent = lettersGuessed.join("-");
@@ -69,20 +74,20 @@ document.onkeyup = function (event) {
 
     //This resets the guesses so far
     
-    if (computerChoice == userGuess) {
+    if (computerChoice === userGuess) {
         win++;
         console.log("You won!");
         alert("+1 Win nice job!")
         guessesSoFar = [];
         computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-        console.log("Win: " + win + "Losses:" + lose + "guesses:" + guesses + "Guesses So Far:" + guessesSoFar + "Computer Chose:" + computerChoice);
+        console.log("Win: " + win + " Computer Chose:" + computerChoice);
     }
 
     if (computerChoice != userGuess) {
         guesses--;
         guessesSoFar = [];
-        computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-        console.log("Win: " + win + "Losses:" + lose + "guesses:" + guesses + "Guesses So Far:" + guessesSoFar + "Computer Chose:" + computerChoice);
+       // computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        console.log("Losses:" + lose +  " Computer Chose:" + computerChoice);
     }
     
     if (guesses === 0) {
@@ -90,19 +95,14 @@ document.onkeyup = function (event) {
         guesses = 9
         lose++;
     }
-     // var winElement = document.getElementById("winElement");
-     //  var loseElement = document.getElementById("loseElement");
-     //  var tieElement = document.getElementById("tieElement");
 
-
- 
-
-
-
-document.getElementById('win').innerHTML = "" + win;
-document.getElementById('lose').innerHTML = "" + lose;
-document.getElementById('guesses').innerHTML = "" + guesses;
+document.getElementById('win').innerHTML = " " + win;
+document.getElementById('lose').innerHTML = " " + lose;
+document.getElementById('guesses').innerHTML = " " + guesses;
 }
+
+
+
 </script>
 
 </html>
